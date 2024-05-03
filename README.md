@@ -1,10 +1,10 @@
 #Voltway
 
-![Voltway Image](./voltway%20home.jpg)
+![Voltway Image](./frontend/assets/images/voltway_home.jpg)
 
 ## What is Voltway? 
 
-**Voltway** is a web-based platform that aims to create an easier and more convenient experience to **Electric Vehicle* (EV)** users 
+**Voltway** is a web-based platform that aims to create an easier and more convenient experience to **Electric Vehicle (EV)** users 
 
 ## What services does Voltway provides?
 
