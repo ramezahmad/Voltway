@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>login & sign Up station</title>
+    <!--font-family-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Rufina:400,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/registerStationStyle.css" />
+
+    <!-- leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- axios -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+  </head>
+
+  <body class="light-mode">
+    <div id="container" class="container">
+      <!-- FORM SECTION -->
+      <div class="row">
+        <!-- SIGN UP -->
+        <div class="col align-items-center flex-col sign-up">
+          <div class="form-wrapper align-items-center">
+            <div class="form sign-up">
+              <div class="input-group">
+                <i class="bx bxs-user"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  id="registerStationUsername"
+                />
+              </div>
+              <div class="input-group">
+                <i class="bx bxs-user"></i>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  id="registerStationName"
+                />
+              </div>
+              <div class="input-group">
+                <i class="bx bx-mail-send"></i>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  id="registerStationEmail"
+                />
+              </div>
+              <div class="input-group">
+                <i class="bx bxs-lock-alt"></i>
+                <input
+                  type="text"
+                  placeholder="Password"
+                  id="registerStationPassword"
+                />
+              </div>
+              <p
+                style="color: red; font-size: 12px; text-align: left"
+                id="passwordError"
+              ></p>
+              <div class="input-group">
+                <i class="bx bxs-lock-alt"></i>
+                <input
+                  type="text"
+                  placeholder="Confirm password"
+                  id="registerStationConfirmPassword"
+                />
+              </div>
+              <p
+                style="color: red; font-size: 12px; text-align: left"
+                id="confirmPasswordError"
+              ></p>
+              <div class="input-group">
+                <i class="bx bx-mail-send"></i>
+                <input
+                  type="number"
+                  placeholder="Number of Charge Points"
+                  id="registerStationChargePointsNumber"
+                />
+              </div>
+              <div class="input-group">
+                <i class="bx bx-mail-send"></i>
+                <input
+                  type="number"
+                  placeholder="Phone Number"
+                  id="registerStationPhoneNumber"
+                />
+              </div>
+
+              <div class="input-group">
+                <i class="bxs-lock-alt"></i>
+                <div class="multiselect">
+                  <label for="charger-type">Charger types</label><br />
+                </div>
+                <div class="checkboxes">
+                  <input style="margin-left: 10px" type="checkbox" id="type1" />
+                  <label for="type1">America</label>
+                  <input style="margin-left: 10px" type="checkbox" id="type2" />
+                  <label for="type2">Japan</label>
+                  <input style="margin-left: 10px" type="checkbox" id="type3" />
+                  <label for="type3">China</label>
+                  <input style="margin-left: 10px" type="checkbox" id="type4" />
+                  <label for="type4">EU</label>
+                  <input style="margin-left: 10px" type="checkbox" id="type5" />
+                  <label for="type5">Tesla</label>
+                </div>
+              </div>
+              <!-- Add a button to trigger map modal -->
+              <button style="background-color: gray;" type="button" onclick="showMapModal()">
+                Select Location
+              </button>
+
+              <!-- Include a modal for the map -->
+              <div style="margin-top: 5px" id="mapModal" class="modal">
+                <!-- close map button -->
+                <div style="text-align: left" class="modal-content">
+                  <span
+                    style="
+                      background-color: white;
+                      text-align: center;
+                      padding: 2px 4px;
+                      cursor: pointer;
+                      border-radius: 10px;
+                    "
+                    class="close"
+                    onclick="closeMapModal()"
+                    >&times;
+                  </span>
+                  <!-- /close map button -->
+                  <div id="mapModalContent" style="height: 400px"></div>
+                  <button
+                    style="margin: 5px 0px 20px; background-color: gray;"
+                    onclick="saveSelectedLocation()"
+                  >
+                    Save Location
+                  </button>
+                </div>
+              </div>
+              <!-- Hidden input fields to store the selected coordinates -->
+              <input type="text" id="latitude" name="latitude" hidden/>
+              <input type="text" id="longitude" name="longitude" hidden/>
+
+              <button style="margin-top: 20px;" id="registerStationBtn">Register as station</button>
+              <p>
+                <span> Already have an account? </span>
+                <a href="login.html">Login here</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- END SIGN UP -->
+        <!-- SIGN IN -->
+        <div class="col align-items-center flex-col sign-in">
+          <div class="form-wrapper align-items-center">
+            <div class="form sign-in">
+              <div class="input-group">
+                <i class="bx bxs-user"></i>
+                <input type="text" placeholder="Username" />
+              </div>
+              <div class="input-group">
+                <i class="bx bxs-lock-alt"></i>
+                <input type="password" placeholder="Password" />
+              </div>
+              <button>Sign in as station</button>
+              <p>
+                <b> Forgot password? </b>
+              </p>
+              <p>
+                <span> Don't have an account? </span>
+                <b onclick="toggle()" class="pointer"> Sign up here </b>
+              </p>
+            </div>
+          </div>
+          <div class="form-wrapper"></div>
+        </div>
+        <!-- END SIGN IN -->
+      </div>
+      <!-- END FORM SECTION -->
+      <!-- CONTENT SECTION -->
+      <div class="row content-row">
+        <!-- SIGN IN CONTENT -->
+        <div class="col align-items-center flex-col">
+          <div class="text sign-in">
+            <h2>Volt Way</h2>
+          </div>
+          <div class="img sign-in"></div>
+        </div>
+        <!-- END SIGN IN CONTENT -->
+        <!-- SIGN UP CONTENT -->
+        <div class="col align-items-center flex-col">
+          <div class="img sign-up"></div>
+          <div class="text sign-up">
+            <h2>Join with us</h2>
+          </div>
+        </div>
+        <!-- END SIGN UP CONTENT -->
+      </div>
+      <!-- END CONTENT SECTION -->
+    </div>
+
+    <script src="./assets/js/resgisterStationScript.js"></script>
+
+    
+  </body>
+</html>

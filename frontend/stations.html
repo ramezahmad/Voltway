@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stations</title>
+
+    <!-- call axios -->
+    <script src="./node_modules/axios/dist/axios.js"></script>
+
+    <!-- call bootstrap -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+
+    <!--font-family-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Rufina:400,700"
+      rel="stylesheet"
+    />
+    <!-- For favicon png -->
+    <link
+      rel="shortcut icon"
+      type="image/icon"
+      href="assets/logo/favicon.png"
+    />
+
+    <!--font-awesome.min.css-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--linear icon css-->
+    <link rel="stylesheet" href="assets/css/linearicons.css" />
+
+    <!--flaticon.css-->
+    <link rel="stylesheet" href="assets/css/flaticon.css" />
+
+    <!--animate.css-->
+    <link rel="stylesheet" href="assets/css/animate.css" />
+
+    <!--owl.carousel.css-->
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css" />
+
+    <!--bootstrap.min.css-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+
+    <!-- bootsnav -->
+    <link rel="stylesheet" href="assets/css/bootsnav.css" />
+
+    <!--style.css-->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!--responsive.css-->
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <!-- Include jQuery from a CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+      #buttons {
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .station-info {
+        margin-bottom: 1.5em;
+      }
+      .book-btn {
+        width: 100%;
+        height: 60px;
+        background: #000;
+        color: #fff;
+      }
+      .book-btn:hover {
+        color: #fff;
+      }
+      .rate-btn{
+        width: 100%;
+        height: 60px;
+        background: #000;
+        color: #fff;
+        margin-top: 10px;
+      }
+      .rate-btn:hover {
+        color: #fff;
+      }
+      .formControl {
+        position: relative;
+        display: block;
+        cursor: pointer;
+        user-select: none;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        padding: 15px 20px;
+        height: 60px;
+        outline: 0 !important;
+        border: 0;
+      }
+
+      .options-container {
+        display: none;
+        position: sticky;
+        z-index: 1;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        max-height: 300px;
+        overflow-y: auto;
+        width: 100%; /* Ensure full width of the container */
+      }
+
+      .option {
+        padding: 15px 20px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .option:hover {
+        background-color: #f8f9fa;
+      }
+
+      /* Show the options container when the class is applied */
+      .show-options .options-container {
+        display: block;
+      }
+    </style>
+    <link rel="stylesheet" href="./assets/css/stationsStyles.css">
+  </head>
+
+  <body>
+    <section
+      id="home"
+      class="welcome-hero"
+      style="
+        background: url(./assets/images/tesla-supercharger-charger-charging.jpg)
+          no-repeat;
+        background-size: cover;
+        max-height: 100vh;
+      "
+    >
+      <!-- top-area Start -->
+      <div class="top-area">
+        <div class="header-area">
+          <!-- Start Navigation -->
+          <nav
+            class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy"
+            data-minus-value-desktop="70"
+            data-minus-value-mobile="55"
+            data-speed="1000"
+          >
+            <div class="container" style="width:95%;">
+              <!-- Start Header Navigation -->
+              <div class="navbar-header">
+                <button
+                  type="button"
+                  class="navbar-toggle"
+                  data-toggle="collapse"
+                  data-target="#navbar-menu"
+                >
+                  <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html"
+                  >voltway<span></span
+                ></a>
+              </div>
+              <!--/.navbar-header-->
+              <!-- End Header Navigation -->
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div
+                class="collapse navbar-collapse menu-ui-design"
+                id="navbar-menu"
+              >
+                <ul
+                  class="nav navbar-nav navbar-right"
+                  data-in="fadeInDown"
+                  data-out="fadeOutUp"
+                  style="text-align: center;"
+                >
+                  <li class=""><a href="#bookingRequest" data-toggle="modal" >My Booking</a></li>
+                  
+                  <li
+                    style="
+                      background: #01b8fa;
+                      border-radius: 0px 0px 25px 25px;
+                      text-align: center;
+                    "
+                  >
+                    <a href="" id="loginBtn"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="25"
+                        fill="currentColor"
+                        class="bi bi-person-circle"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+                        />
+                      </svg>
+                    </a>
+                  </li>
+                </ul>
+                <!--/.nav -->
+              </div>
+              <!-- /.navbar-collapse -->
+            </div>
+            <!--/.container-->
+          </nav>
+          <!--/nav-->
+          <!-- End Navigation -->
+        </div>
+        <!--/.header-area-->
+        <div class="clearfix"></div>
+      </div>
+      <!-- /.top-area-->
+      <!-- top-area End -->
+      <div class="container">
+        <div class="welcome-hero-txt">
+          <h2>Find Charge Points faster with voltway</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="model-search-content">
+              <div class="row">
+                
+
+                <div class="col-md-offset-1 col-md-6 col-sm-12">
+                  <div class="single-model-search">
+                    <h2>select Model</h2>
+                    <div class="model-select-icon">
+                      <select class="form-control" id="models"></select
+                      ><!-- /.select-->
+                    </div>
+                    <!-- /.model-select-icon -->
+                  </div>
+                  <div class="single-model-search">
+                    <h2>Select Making</h2>
+                    <div class="model-select-icon">
+                      <select class="form-control" id="making">
+                        <option value="Default">default</option>
+                        <option value="car1">China</option>
+                        <option value="car2">EU</option>
+                        <option value="car3">Japan</option>
+                        <option value="car4">North America</option>
+                        <option value="car5">Tesla</option>
+                      </select>
+                      <!-- /.select-->
+                    </div>
+                    <!-- /.model-select-icon -->
+                  </div>
+                </div>
+
+                <div class="col-md-5 col-sm-12">
+                  <div class="single-model-search text-center">
+                    <button
+                      class="welcome-btn model-search-btn"
+                      id="applyButton"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/.welcome-hero-->
+    <!--welcome-hero end -->
+    <!--service start -->
+    <section id="service" class="service">
+      <div class="container">
+        <div class="service-content">
+          <div class="row" id="stations"></div>
+        </div>
+      </div>
+      <!--/.container-->
+    </section>
+    <!--/.service-->
+    <!--service end-->
+
+    <!--contact start-->
+    <footer id="contact" class="contact">
+      <div class="container">
+        <div class="footer-top">
+          <div class="row">
+            <div class="col-md-3 col-sm-6">
+              <div class="single-footer-widget">
+                <div class="footer-logo">
+                  <a href="index.html">voltway</a>
+                </div>
+                <p>
+                  Ased do eiusm tempor incidi ut labore et dolore magnaian
+                  aliqua. Ut enim ad minim veniam.
+                </p>
+                <div class="footer-contact">
+                  <p>info@voltway.com</p>
+                  <p>+962 799 551 620</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-6">
+              <div class="single-footer-widget">
+                <h2>about voltway</h2>
+                <ul>
+                  <li><a href="#">about us</a></li>
+                  <li><a href="#">career</a></li>
+                  <li>
+                    <a href="#">terms <span> of service</span></a>
+                  </li>
+                  <li><a href="#">privacy policy</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+              <div class="single-footer-widget">
+                <h2>top brands</h2>
+                <div class="row">
+                  <div class="col-md-7 col-xs-6">
+                    <ul>
+                      <li><a href="#">audi</a></li>
+                      <li><a href="#">BMW</a></li>
+                      <li><a href="#">bolt</a></li>
+                      <li><a href="#">Changan</a></li>
+                      <li><a href="#">infiniti</a></li>
+                      <li><a href="#">kia</a></li>
+                      
+                    </ul>
+                  </div>
+                  <div class="col-md-5 col-xs-6">
+                    <ul>
+                      <li><a href="#">mG</a></li>
+                      <li><a href="#">nissan</a></li>
+                      <li><a href="#">opel</a></li>
+                      <li><a href="#">porsche</a></li>
+                      <li><a href="#">tesla</a></li>
+                      <li><a href="#">volkswagen</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-offset-1 col-md-3 col-sm-6">
+              <div class="single-footer-widget">
+                <h2>news letter</h2>
+                <div class="footer-newsletter">
+                  <p>Subscribe to get latest news update and informations</p>
+                </div>
+                <div class="hm-foot-email">
+                  <div class="foot-email-box">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Add Email"
+                    />
+                  </div>
+                  <!--/.foot-email-box-->
+                  <div class="foot-email-subscribe">
+                    <span><i class="fa fa-arrow-right"></i></span>
+                  </div>
+                  <!--/.foot-email-icon-->
+                </div>
+                <!--/.hm-foot-email-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>
+                &copy; copyright.designed and developed by
+                <a href="https://www.themesine.com/">themesine</a>.
+              </p>
+              <!--/p-->
+            </div>
+            <div class="col-sm-6">
+              <div class="footer-social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                <a href="#"><i class="fa fa-behance"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.footer-copyright-->
+      </div>
+      <!--/.container-->
+
+      <div id="scroll-Top">
+        <div class="return-to-top">
+          <i
+            class="fa fa-angle-up"
+            id="scroll-top"
+            data-toggle="tooltip"
+            data-placement="top"
+            title=""
+            data-original-title="Back to Top"
+            aria-hidden="true"
+          ></i>
+        </div>
+      </div>
+      <!--/.scroll-Top-->
+    </footer>
+    <!--/.contact-->
+    <!-- logout modal -->
+    <!-- The modal -->
+    <div
+      class="modal fade"
+      id="flipFlop"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">Log out</h4>
+          </div>
+          <div class="modal-body">Are you sure you want to logout?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              onclick="logout()"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- booking modal -->
+    <!-- The modal -->
+    <div
+      class="modal fade"
+      id="booking"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">Book Now</h4>
+          </div>
+          <div class="modal-body" style="display: flex; flex-direction: column">
+            
+            <label for="selectDate">Choose the date of booking</label>
+            <input class="booking-input" type="date" id="selectDate" />
+            <label for="startTime">Choose the hour to start the session</label>
+            <input class="booking-input" type="time" id="startTime" />
+            <label for="endTime"
+              >Session Time in minutes
+              <span style="font-size: smaller"
+                >(any number above 60 minutes will be declined)</span
+              ></label
+            >
+            <input
+              class="booking-input"
+              type="number"
+              max="60"
+              id="timeLength"
+            />
+            <label for="selectCar">Select your car to charge</label>
+            <select name="" id="selectCar"></select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              id="closeBookModal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" id="bookRequestBtn" data-dismiss="modal">
+              Book
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closed station modal -->
+    <!-- The modal -->
+    <div
+      class="modal fade"
+      id="closedStation"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">OOPS !</h4>
+          </div>
+          <div class="modal-body">This station is closed at the moment</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking success modal -->
+    <div
+      class="modal fade bg-success"
+      id="bookSuccess"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">Booked Successfully</h4>
+          </div>
+          <div class="modal-body" id="successMessage"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cancelled Session -->
+    <div
+      class="modal fade bg-danger"
+      id="cancelled"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">We apologize</h4>
+          </div>
+          <div class="modal-body" id="cancelMessage"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- rate modal -->
+    <div
+      class="modal fade"
+      id="rateStation"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">Rate Us</h4>
+          </div>
+          <div class="modal-body" id="rate">
+            
+              <div class="rate">
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+              </div>
+            
+            
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- My booking modal -->
+    <div
+      class="modal fade bg-danger"
+      id="bookingRequest"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modalLabel">Booking Details</h4>
+          </div>
+          <div class="modal-body" id="myBooking">
+            
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              id="cancelSessionBtn"
+            >
+              Cancel Session
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Include all js compiled plugins (below), or include individual files as needed -->
+    <script src="assets/js/jquery.js"></script>
+
+    <!--modernizr.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+    <!--bootstrap.min.js-->
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- bootsnav js -->
+    <script src="assets/js/bootsnav.js"></script>
+
+    <!--owl.carousel.js-->
+    <script src="assets/js/owl.carousel.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!--Custom JS-->
+    <script src="assets/js/custom.js"></script>
+
+    <!-- peerjs -->
+    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+
+    <script src="./assets/js/stationsScript.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

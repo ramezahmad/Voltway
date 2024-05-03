@@ -1,0 +1,101 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+body{
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  height: 100vh;
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(14,106,130,1) 100%);
+}
+header{
+  font-family: 'Rufina', serif;
+  
+  padding: 2rem;
+  background-color: black;
+  
+}
+nav{
+  display: flex;
+  justify-content: space-between;
+}
+nav a{
+  background: none;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+.chat{
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.chat img{
+  width: 35px;
+  height: 35px;
+}
+
+.response{
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(88,9,121,1) 0%, rgba(13,5,90,1) 0%, rgba(6,5,87,1) 0%, rgba(34,6,99,1) 0%, rgba(36,169,187,0.42629551820728295) 0%);
+
+  
+}
+
+.messagebar{
+  position: fixed;
+  bottom: 0;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  
+}
+
+.messagebar .bar-wrapper{
+  background-color: #687d86;
+  border-radius: 5px;
+  width: 80vw;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bar-wrapper input{
+  width: 100%;
+  padding: 5px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: none;
+  color: #ccc;
+}
+
+.bar-wrapper input::placeholder{
+  color: #ccc;
+}
+
+.messagebar button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.message-box{
+  height: calc(100vh - 5rem);
+  overflow-y: auto;
+}
